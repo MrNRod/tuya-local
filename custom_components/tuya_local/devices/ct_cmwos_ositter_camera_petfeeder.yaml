@@ -1,0 +1,445 @@
+name: Camera pet feeder
+products:
+  - id: qea4aetqi9ibnumu
+    manufacturer: CT
+    model: CT-CMWOS
+    name: O Sitter Camera Pet Feeder
+entities:
+  - entity: camera
+    dps:
+      - id: 115
+        type: hex
+        optional: true
+        persist: false
+        sensitive: true
+        name: snapshot
+      - id: 134
+        type: boolean
+        optional: true
+        name: motion_enable
+  - entity: switch
+    translation_key: flip_image
+    category: config
+    dps:
+      - id: 103
+        type: boolean
+        name: switch
+  - entity: switch
+    name: Timestamp overlay
+    icon: "mdi:watermark"
+    category: config
+    dps:
+      - id: 104
+        type: boolean
+        name: switch
+  - entity: switch
+    name: Privacy mode
+    icon: "mdi:eye-off"
+    category: config
+    dps:
+      - id: 105
+        type: boolean
+        name: switch
+  - entity: select
+    translation_key: motion_sensitivity
+    category: config
+    dps:
+      - id: 106
+        type: string
+        name: option
+        mapping:
+          - dps_val: "0"
+            value: low
+          - dps_val: "1"
+            value: medium
+          - dps_val: "2"
+            value: high
+  - entity: select
+    name: Night vision
+    icon: "mdi:weather-night"
+    category: config
+    dps:
+      - id: 108
+        type: string
+        name: option
+        mapping:
+          - dps_val: "0"
+            value: Auto
+          - dps_val: "1"
+            value: "Off"
+          - dps_val: "2"
+            value: "On"
+  - entity: sensor
+    name: SD card format state
+    icon: "mdi:micro-sd"
+    class: enum
+    category: diagnostic
+    dps:
+      - id: 117
+        type: integer
+        name: sensor
+        optional: true
+        mapping:
+          - dps_val: 0
+            value: formatted
+          - dps_val: -20000
+            value: formatting
+          - dps_val: -20001
+            value: format_failed
+          - dps_val: -20002
+            value: no_sd_card
+          - dps_val: -20003
+            value: card_error
+  - entity: select
+    name: PTZ control
+    icon: "mdi:pan"
+    category: config
+    dps:
+      - id: 119
+        type: string
+        name: option
+        optional: true
+        mapping:
+          - dps_val: "0"
+            value: Stop
+          - dps_val: "1"
+            value: Up
+          - dps_val: "2"
+            value: Upper right
+          - dps_val: "3"
+            value: Right
+          - dps_val: "4"
+            value: Lower right
+          - dps_val: "5"
+            value: Down
+          - dps_val: "6"
+            value: Lower left
+          - dps_val: "7"
+            value: Left
+          - dps_val: "8"
+            value: Upper left
+          - dps_val: "9"
+            value: Auto cruise
+  - entity: select
+    name: Siren sound
+    icon: "mdi:alarm-light"
+    category: config
+    dps:
+      - id: 125
+        type: string
+        name: option
+        optional: true
+        mapping:
+          - dps_val: item_1
+            value: Sound 1
+          - dps_val: item_2
+            value: Sound 2
+          - dps_val: item_3
+            value: Sound 3
+          - dps_val: item_4
+            value: Sound 4
+          - dps_val: item_5
+            value: Sound 5
+          - dps_val: item_6
+            value: Sound 6
+          - dps_val: item_7
+            value: Sound 7
+          - dps_val: item_8
+            value: Sound 8
+          - dps_val: item_9
+            value: Sound 9
+          - dps_val: item_10
+            value: Sound 10
+  - entity: select
+    name: Recording mode
+    icon: "mdi:file-video"
+    category: config
+    dps:
+      - id: 151
+        type: string
+        name: option
+        mapping:
+          - dps_val: "1"
+            value: Event
+          - dps_val: "2"
+            value: Continuous
+  - entity: number
+    translation_key: volume
+    category: config
+    dps:
+      - id: 160
+        type: integer
+        name: value
+        unit: "%"
+        range:
+          min: 0
+          max: 100
+  - entity: switch
+    name: Motion tracking
+    icon: "mdi:motion-sensor"
+    category: config
+    dps:
+      - id: 161
+        type: boolean
+        optional: true
+        name: switch
+  - entity: button
+    class: restart
+    category: config
+    dps:
+      - id: 162
+        type: boolean
+        optional: true
+        name: button
+  - entity: button
+    name: Gimbal calibration
+    icon: "mdi:axis-arrow"
+    category: diagnostic
+    dps:
+      - id: 241
+        type: boolean
+        optional: true
+        name: button
+  - entity: button
+    name: Look at bowl
+    icon: "mdi:target"
+    dps:
+      - id: 244
+        type: boolean
+        optional: true
+        name: button
+  - entity: switch
+    name: Motion area detection
+    icon: "mdi:motion-sensor"
+    category: config
+    dps:
+      - id: 168
+        type: boolean
+        name: switch
+  - entity: switch
+    name: Pet detection
+    icon: "mdi:paw"
+    category: config
+    dps:
+      - id: 187
+        type: boolean
+        optional: true
+        name: switch
+  - entity: binary_sensor
+    name: Food hopper has food
+    icon: "mdi:food-drumstick"
+    category: diagnostic
+    dps:
+      - id: 231
+        type: boolean
+        name: sensor
+  - entity: number
+    name: Dispense food
+    icon: "mdi:food-drumstick"
+    dps:
+      - id: 252
+        type: integer
+        optional: true
+        name: value
+        unit: portions
+        range:
+          min: 1
+          max: 10100
+  - entity: sensor
+    name: Can add food
+    icon: "mdi:cup-water"
+    class: enum
+    category: diagnostic
+    dps:
+      - id: 254
+        type: integer
+        optional: true
+        name: sensor
+        mapping:
+          - dps_val: 0
+            value: empty
+          - dps_val: 10
+            value: low
+          - dps_val: 20
+            value: quarter
+          - dps_val: 50
+            value: half
+          - dps_val: 80
+            value: most
+          - dps_val: 100
+            value: full
+  - entity: switch
+    name: Child lock
+    icon: "mdi:lock-outline"
+    category: config
+    dps:
+      - id: 235
+        type: boolean
+        optional: true
+        name: switch
+  - entity: sensor
+    name: Battery status
+    icon: "mdi:battery"
+    class: enum
+    category: diagnostic
+    dps:
+      - id: 238
+        type: string
+        name: sensor
+        optional: true
+        mapping:
+          - dps_val: "0"
+            value: critical
+          - dps_val: "1"
+            value: low
+          - dps_val: "2"
+            value: medium
+          - dps_val: "3"
+            value: high
+          - dps_val: "4"
+            value: full
+  - entity: sensor
+    name: Food storage status
+    icon: "mdi:food-drumstick"
+    class: enum
+    category: diagnostic
+    dps:
+      - id: 239
+        type: string
+        name: sensor
+        optional: true
+        mapping:
+          - dps_val: "0"
+            value: empty
+          - dps_val: "1"
+            value: low
+          - dps_val: "2"
+            value: ok
+  - entity: select
+    name: Power supply mode
+    icon: "mdi:power-plug"
+    category: diagnostic
+    dps:
+      - id: 249
+        type: string
+        name: option
+        optional: true
+        mapping:
+          - dps_val: battery
+            value: Battery
+          - dps_val: power
+            value: Mains
+  - entity: sensor
+    name: Device settings
+    icon: "mdi:code-json"
+    category: diagnostic
+    hidden: true
+    dps:
+      - id: 246
+        type: json
+        name: sensor
+        optional: true
+  - entity: sensor
+    name: Device info
+    icon: "mdi:information"
+    category: diagnostic
+    hidden: true
+    dps:
+      - id: 243
+        type: json
+        name: sensor
+        optional: true
+  - entity: select
+    name: Laser motion track
+    icon: "mdi:laser-pointer"
+    category: config
+    dps:
+      - id: 247
+        type: integer
+        name: option
+        optional: true
+        mapping:
+          - dps_val: 0
+            value: "Off"
+          - dps_val: 101
+            value: Rectangle
+          - dps_val: 102
+            value: Diamond
+          - dps_val: 103
+            value: Triangle
+          - dps_val: 104
+            value: Random
+  - entity: select
+    name: Laser call sound
+    icon: "mdi:bell-ring"
+    category: config
+    dps:
+      - id: 233
+        type: string
+        name: option
+        optional: true
+        mapping:
+          - dps_val:
+              '{"akid":"LTAI5tGdLNH1UgMjdZmvG8Rj","ep":"oss-accelerate.aliyuncs.com","aks":"vOIGWb25UsmR69oK5ytyIOyHr3cAVK","bn":"hholove-app-pet-avatar","object_name":"oSitterVoice/laser-bell.pcm"}'
+            value: Bells
+          - dps_val:
+              '{"akid":"LTAI5tGdLNH1UgMjdZmvG8Rj","ep":"oss-accelerate.aliyuncs.com","aks":"vOIGWb25UsmR69oK5ytyIOyHr3cAVK","bn":"hholove-app-pet-avatar","object_name":"oSitterVoice/laser-bird.pcm"}'
+            value: Bird song
+          - dps_val:
+              '{"akid":"LTAI5tGdLNH1UgMjdZmvG8Rj","ep":"oss-accelerate.aliyuncs.com","aks":"vOIGWb25UsmR69oK5ytyIOyHr3cAVK","bn":"hholove-app-pet-avatar","object_name":"oSitterVoice/laser-bubble.pcm"}'
+            value: Bubble
+          - dps_val:
+              '{"akid":"LTAI5tGdLNH1UgMjdZmvG8Rj","ep":"oss-accelerate.aliyuncs.com","aks":"vOIGWb25UsmR69oK5ytyIOyHr3cAVK","bn":"hholove-app-pet-avatar","object_name":"oSitterVoice/laser-cat.pcm"}'
+            value: Cat meow
+          - dps_val:
+              '{"akid":"LTAI5tGdLNH1UgMjdZmvG8Rj","ep":"oss-accelerate.aliyuncs.com","aks":"vOIGWb25UsmR69oK5ytyIOyHr3cAVK","bn":"hholove-app-pet-avatar","object_name":"oSitterVoice/laser-mouse.pcm"}'
+            value: Mouse
+          - dps_val:
+              '{"akid":"LTAI5tGdLNH1UgMjdZmvG8Rj","ep":"oss-accelerate.aliyuncs.com","aks":"vOIGWb25UsmR69oK5ytyIOyHr3cAVK","bn":"hholove-app-pet-avatar","object_name":"oSitterVoice/mute.pcm"}'
+            value: Mute
+  - entity: select
+    name: Feeding call sound
+    icon: "mdi:bullhorn"
+    category: config
+    dps:
+      - id: 251
+        type: string
+        name: option
+        optional: true
+        mapping:
+          - dps_val:
+              '{"akid":"LTAI5tGdLNH1UgMjdZmvG8Rj","ep":"oss-accelerate.aliyuncs.com","aks":"vOIGWb25UsmR69oK5ytyIOyHr3cAVK","bn":"hholove-app-pet-avatar","object_name":""}'
+            value: Mute
+          - dps_val:
+              '{"akid":"LTAI5tGdLNH1UgMjdZmvG8Rj","ep":"oss-accelerate.aliyuncs.com","aks":"vOIGWb25UsmR69oK5ytyIOyHr3cAVK","bn":"hholove-app-pet-avatar","object_name":"oSitterVoice/feed-1.pcm"}'
+            value: Default
+  - entity: text
+    name: Schedule
+    icon: "mdi:calendar-clock"
+    category: config
+    hidden: true
+    dps:
+      - id: 237
+        type: string
+        optional: true
+        name: value
+  - entity: text
+    name: Do not disturb schedule
+    icon: "mdi:bell-sleep"
+    category: config
+    hidden: true
+    dps:
+      - id: 236
+        type: string
+        optional: true
+        name: value
+  - entity: text
+    name: Privacy mode schedule
+    icon: "mdi:calendar-clock"
+    category: config
+    hidden: true
+    dps:
+      - id: 234
+        type: string
+        optional: true
+        name: value
